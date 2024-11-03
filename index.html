@@ -1,11 +1,70 @@
-<html>
-<script type="text/javascript" src="js/script.js"></script>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <title>File Server</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
 </head>
-<body onload="updateFileList()">
+<body>
+    <script type="text/javascript" src="js/script.js"></script>
+
+    <header>
+        <div class="nav-container">
+            <nav class="navbar">
+                <h1 id="navbar-logo">File Server</h1>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+
+                <ul class="nav-menu">
+                    <li><a class="nav-links" href="#">Home</a></li>
+                    <li><a class="nav-links nav-links-btn" href="#home" id="user_profile">X</a></li>
+                    <li><a class="nav-links nav-links-btn" href="/.auth/login/google?prompt=login&post_login_redirect_uri=/">Change Accounts</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <br />
+
+
+    <div class="upload-btn-div">
+        <h1>My Files</h1>
+        <button class="upload-btn" onclick="document.getElementById('uploadForm').style.display='block'">Upload File</button>
+    </div>
+
+    <br />
+
+
+    <div id="uploadForm" class="upload-div">
+        <div class="upload-background">
+            <form action="/upload" class="file-upload" method="post" enctype="multipart/form-data" >
+                <div style="display: flex; justify-content: space-between;">
+                    <h1>Upload File</h1>
+                    <span class="close" onclick="document.getElementById('uploadForm').style.display='none'">&times;</span>
+                </div>
+                <hr style="width: 99%;">
+                <br />
+                <div style="display: flex; justify-content: space-between;">
+
+                    <input type="file" class="file-upload" name="file" id="file" onchange="document.getElementById('file_name').innerText = this.files[0].name"/>
+                    <label for="file" class="file-upload">Choose a file</label>
+                    <p id="file_name" class="file-upload">No file chosen</p>
+                <button type="submit" class="file-upload">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <hr style="width: 99%;">
+
     <!--list of files will be displayed here from UpdateFileList()-->
-    <ul id="fileList"></ul>
+    <ul id="filelist"></ul>
 </body>
 </html>
 
