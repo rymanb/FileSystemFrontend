@@ -9,8 +9,10 @@ app.use(express.static(__dirname + '/public'));
 var local = true;
 
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     // get user email from request stored in X-MS-CLIENT-PRINCIPAL-NAME header
+    // get /.auth/me and return it
+    
     var userEmail = req.headers['x-ms-client-principal-name'];
     if (!userEmail) {
         // return all headers if user email is not found
@@ -55,7 +57,7 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
     });
 
-app.get('/user', (req, res) => {
+app.get('/user', async (req, res) => {
     // get user email from request stored in X-MS-CLIENT-PRINCIPAL-NAME header
     var userEmail = req.headers['x-ms-client-principal-name'];
     if (!userEmail) {
@@ -70,7 +72,10 @@ app.get('/user', (req, res) => {
     }
     
     var userid = userEmail.split('@')[0];
-    res.json({ email: userEmail, userid: userid });
+
+
+    
+    res.json({ email: userEmail, userid: userid});
     });
 
 app.get('/files', async (req, res) => {

@@ -113,13 +113,41 @@ function deleteFile(filename) {
         });
 }
 
-function getUser() {
+async function getUser() {
     fetch("/user")
     .then(response => response.json())
     .then(data => {
         var user = document.getElementById('user_profile');
         user.textContent = data.userid;
         });
+
+        const headers = {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        };
+    
+    
+            const requestOptions = {
+                method: 'GET',
+                headers: headers,
+                'credentials': 'same-origin'  //credentials go here!!!
+            };
+    
+            const response = await fetch('/.auth/me', requestOptions);
+            const payload = await response.json();
+            token = payload[0].access_token;
+
+            url = 'https://www.googleapis.com/oauth2/v1/userinfo?access_token=' + token;//req.headers['x-ms-client-principal'];
+            var data = await fetch(url);
+            data = await data.json();
+
+            var fl = document.getElementById('filelist');
+
+            var img = document.createElement('img');
+            img.src = data.picture;
+    
+            fl.appendChild(img);
+            
 }
 
 document.addEventListener('DOMContentLoaded', function() {
