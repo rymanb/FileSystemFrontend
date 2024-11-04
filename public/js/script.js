@@ -5,28 +5,81 @@ function updateFileList() {
     fetch("/files")
     .then(response => response.json())
     .then(data => {
+
+        // disable loading spinner
+        var spinner = document.getElementById('FileListSpinner');
+        spinner.style.display = 'none';
+
         // update file list with names of files and download and delete buttons
         var ul = document.getElementById('filelist');
         ul.className = "file-list";
         data.forEach(file => {
             var li = document.createElement('li');
-            li.className = "file-list";
-            li.textContent = file.filename;
+            // use tailwind css classes to style the list should be virtically centered
+            //li.textContent = file.filename;
+            var div = document.createElement('div');
+            div.className = "list_name";
+            var text = document.createElement('span');
+            text.textContent = file.filename;
+            div.appendChild(text);
+            li.appendChild(div);
             ul.appendChild(li);
-            var downloadButton = document.createElement('button');
-            downloadButton.className = "file-list";
-            downloadButton.textContent = 'Download';
-            downloadButton.onclick = function() {
-                downloadFile(file.filename);
-                };
-            li.appendChild(downloadButton);
+
+            div = document.createElement('div');
+            div.className = "file-size-div";
+            
+            // size of file
+            var size = document.createElement('span');
+            //size.className = "px-6 text-3xl font-bold text-black-500 mt-4";
+            var bytes = file.contentlength;
+            var kb = bytes / 1024;
+            var mb = kb / 1024;
+            var gb = mb / 1024;
+
+            if (gb >= 1) {
+                size.textContent = gb.toFixed(2) + ' GB';
+            }
+            else if (mb >= 1) {
+                size.textContent = mb.toFixed(2) + ' MB';
+            }
+            else if (kb >= 1) {
+                size.textContent = kb.toFixed(2) + ' KB';
+            }
+            else {
+                size.textContent = bytes + ' bytes';
+            }
+            div.appendChild(size);
+            li.appendChild(div);
+
+            div = document.createElement('div');
+            div.className = "button-div";
+
+
+
+            // download and delete buttons
             var deleteButton = document.createElement('button');
             deleteButton.className = "file-list";
-            deleteButton.textContent = 'Delete';
             deleteButton.onclick = function() {
                 deleteFile(file.filename);
                 };
-            li.appendChild(deleteButton);
+            var icon = document.createElement('i');
+            icon.className = "fa fa-trash";
+            deleteButton.appendChild(icon);
+            div.appendChild(deleteButton);
+
+            var downloadButton = document.createElement('button');
+            downloadButton.className = "file-list";
+            downloadButton.onclick = function() {
+                downloadFile(file.filename);
+                };
+            var icon = document.createElement('i');
+            icon.className = "fa fa-download";
+            downloadButton.appendChild(icon);
+            div.appendChild(downloadButton);
+
+            li.appendChild(div);
+
+
             });
         });
 }
@@ -115,7 +168,14 @@ document.addEventListener('DOMContentLoaded', function() {
 function handleFiles() {
     // Files selected by the user
     const files = document.getElementById('file-input').files;
+    const fileNames = document.getElementById('file-names');
     // You can display selected files or proceed to upload
+
+    if (files.length === 0) {
+        fileNames.textContent = 'No files selected for upload';
+    } else {
+        fileNames.textContent = 'Selected files: ' + Array.from(files).map(file => file.name).join(', ');
+    }
 }
 
 

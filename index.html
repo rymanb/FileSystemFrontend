@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>File Server</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -23,7 +24,7 @@
                 </div>
 
                 <ul class="nav-menu">
-                    <li><a class="nav-links" href="#">Home</a></li>
+                    <li><a class="nav-links" href="#">My Files</a></li>
                     <li><a class="nav-links nav-links-btn" href="#home" id="user_profile">X</a></li>
                     <li><a class="nav-links nav-links-btn" href="/.auth/login/google?prompt=login&post_login_redirect_uri=/">Change Accounts</a></li>
                 </ul>
@@ -33,6 +34,8 @@
 
     <br />
 
+    <!--center div box that will contain the files-->
+    <div class="file-div">
 
     <!--My Files text and Uploadbutton to open form-->
     <div class="flex justify-left">
@@ -55,8 +58,9 @@
                         <!-- Upload Area -->
                         <div class="mb-6">
 
-                            <div class="border-4 border-dashed border-gray-300 rounded-lg h-40 flex items-center justify-center" id="drop-zone">
+                            <div class="border-4 border-dashed border-gray-300 rounded-lg h-40 flex flex-col items-center justify-center" id="drop-zone">
                                 <p class="text-gray-500">Drag and drop files here or <span class="text-blue-600 cursor-pointer" id="file-select">browse</span></p>
+                                <p class="text-gray-500 text-sm" id="file-names"></p>
                                 <input type="file" id="file-input" multiple class="hidden">
                             </div>
                             <div style="text-align: center;">
@@ -71,10 +75,14 @@
             </div>
 
 
-    <hr style="width: 99%;">
+    <!--hr with color grey-->
+    <hr style="width: 100%; border-top: 2px solid #ccc; border-color: rgba(0,0,0,.2);" />
 
     <!--list of files will be displayed here from UpdateFileList()-->
     <ul id="filelist"></ul>
+    <div class="loader" id="FileListSpinner"></div>
+
+    </div>
 </body>
 </html>
 

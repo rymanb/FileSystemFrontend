@@ -25,7 +25,6 @@ body {
 .nav-container {
     width: 100%;
     background-color: var(--darkblue);;
-    border-bottom: 1px solid var(--white);
     box-shadow: 0px 2px 20px #000;
 }
 
@@ -191,21 +190,39 @@ body {
 /* file list */
 ul.file-list {
     list-style-type: none;
-    margin: 10px;
+    margin: 0;
     padding: 0;
+    width: 95%;
+    /* center the list and make them fill the width */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+
 }
 
 ul.file-list li {
     /* make sure there is space between the text and the button */
     padding: 8px;
     margin-bottom: 8px;
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(0,0,0,.2);
     color: #000000;
     border-radius: 5px;
-    box-shadow: 0px 2px 7px #000;
+    box-shadow: 0px 2px 2px #000;
     font-size: 16px;
     font-weight: bold;
+    width: 100%;
+    display: flex;
+    /* text is on the left, button on the right */
+    justify-content: space-between;
+    align-items: center;
+
+    
 }
+
+
 
 ul.file-list button {
     padding: 5px;
@@ -217,6 +234,9 @@ ul.file-list button {
     cursor: pointer;
     border-radius: 3px;
     box-shadow: 0px 2px 7px #000;
+
+    float: right;
+
 }
 
 ul.file-list button:hover {
@@ -316,7 +336,7 @@ ul.file-list button:hover {
 .upload-background {
     /* semi transparent background */
     /* only the background though */
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.8);
     margin: 5% auto;
     padding: 10px;
     border: 1px solid #888;
@@ -374,4 +394,55 @@ ul.file-list button:hover {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.loader {
+    border: 12px solid #c0c0c0; /* Light grey */
+    border-top: 12px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    /* Center the loader */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+.file-div {
+    align-self: center;
+    align-items: center;
+    background-color: #c9cdd3;
+    width: 70%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 7px #000;
+}
+
+.file-size-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    width: 25%;
+}
+
+.list_name {
+    margin-left: 15px;
+    width: 50%;
+}
+
+.button-div {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    width: 25%;
 }
