@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>File Server</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -33,33 +34,42 @@
     <br />
 
 
-    <div class="upload-btn-div">
-        <h1>My Files</h1>
-        <button class="upload-btn" onclick="document.getElementById('uploadForm').style.display='block'">Upload File</button>
+    <!--My Files text and Uploadbutton to open form-->
+    <div class="flex justify-left">
+        <!--move text down to be in line with upload button-->
+        <h1 class="px-6 text-3xl font-bold text-black-500 mt-4">My Files</h1>
+        <!--upload button should be +-->
+        <button class="mt-4 px-6 py-2 text-white rounded-lg upload-btn" onclick="document.getElementById('uploadForm').style.display='block'">+ New</button>
     </div>
+
 
     <br />
-
-
-    <div id="uploadForm" class="upload-div">
-        <div class="upload-background">
-            <form action="/upload" class="file-upload" method="post" enctype="multipart/form-data" >
-                <div style="display: flex; justify-content: space-between;">
-                    <h1>Upload File</h1>
+            <!-- Main Container -->
+            <div id="uploadForm" class="flex upload-div">
+                <div class="upload-background">
                     <span class="close" onclick="document.getElementById('uploadForm').style.display='none'">&times;</span>
-                </div>
-                <hr style="width: 99%;">
-                <br />
-                <div style="display: flex; justify-content: space-between;">
+                    <br />
+                    <!-- Content Area -->
+                    <main class="flex-1 p-6">
+        
+                        <!-- Upload Area -->
+                        <div class="mb-6">
 
-                    <input type="file" class="file-upload" name="file" id="file" onchange="document.getElementById('file_name').innerText = this.files[0].name"/>
-                    <label for="file" class="file-upload">Choose a file</label>
-                    <p id="file_name" class="file-upload">No file chosen</p>
-                <button type="submit" class="file-upload">Upload</button>
+                            <div class="border-4 border-dashed border-gray-300 rounded-lg h-40 flex items-center justify-center" id="drop-zone">
+                                <p class="text-gray-500">Drag and drop files here or <span class="text-blue-600 cursor-pointer" id="file-select">browse</span></p>
+                                <input type="file" id="file-input" multiple class="hidden">
+                            </div>
+                            <div style="text-align: center;">
+                                <button id="upload-btn" class="mt-4 px-6 py-2 text-white rounded-lg upload-btn">Upload Files</button>
+                            </div>
+                        </div>
+
+                        <!-- File List -->
+                    </main>
+
                 </div>
-            </form>
-        </div>
-    </div>
+            </div>
+
 
     <hr style="width: 99%;">
 

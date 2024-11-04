@@ -147,16 +147,7 @@ app.post('/upload', async (req, res) => {
     var userid = userEmail.split('@')[0];
     var url = 'https://filesystemapp.internal.wonderfulsky-750ba161.westus2.azurecontainerapps.io/uploadfile?userid=' + userid;
 
-    // pipe request to url
-    // const request = await axios({
-    //     url: url,
-    //     method: 'POST',
-    //     responseType: 'stream',
-    //     data: req,
-    //     headers: {
-    //         ...req.headers
-    //         }
-    //     });
+
     req.pipe(request.post(url)).pipe(res);
 
 

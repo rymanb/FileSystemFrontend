@@ -80,4 +80,74 @@ document.addEventListener('DOMContentLoaded', function() {
         menu.classList.toggle('is-active');
         menuLinks.classList.toggle('active');
     });
+
+
+    // Event listener for file input
+    const fileInput = document.getElementById('file-input');
+    const fileSelect = document.getElementById('file-select');
+    const dropZone = document.getElementById('drop-zone');
+    const uploadBtn = document.getElementById('upload-btn');
+
+    // Open file dialog on click
+    fileSelect.addEventListener('click', () => fileInput.click());
+
+    // Handle file selection
+    fileInput.addEventListener('change', handleFiles);
+
+    // Handle drag and drop
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('border-blue-600');
     });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('border-blue-600'));
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('border-blue-600');
+        fileInput.files = e.dataTransfer.files;
+        handleFiles();
+    });
+
+    // Upload files on button click
+    uploadBtn.addEventListener('click', uploadFiles);
+
+});
+
+function handleFiles() {
+    // Files selected by the user
+    const files = document.getElementById('file-input').files;
+    // You can display selected files or proceed to upload
+}
+
+
+function uploadFiles() {
+    const fileInput = document.getElementById('file-input');
+    const files = fileInput.files;
+
+    if (files.length === 0) {
+        alert('Please select at least one file to upload.');
+        return;
+    }
+
+    const formData = new FormData();
+    for (let file of files) {
+        formData.append('files', file);
+    }
+
+    fetch('/upload', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (response.ok) {
+                alert('Files uploaded successfully.');
+                loadFileList(); // Refresh the file list
+                fileInput.value = ''; // Reset the file input
+            } else {
+                alert('Error uploading files.');
+            }
+        })
+        .catch(error => {
+            console.error('Error uploading files:', error);
+            alert('Error uploading files.');
+        });
+}

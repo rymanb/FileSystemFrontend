@@ -1,10 +1,10 @@
 :root {
     --darkgray: #212329;
-    --brightred: #f9423d;
+    --brightred: #8dc6ff;
     --white: #fff;
-    --lightred: #f9433dcc;
-    --deepblue: #0d132b;
-    --darkblue: #010619;
+    --lightred: #34495e;
+    --deepblue: #e2e8f0;
+    --darkblue: #0c1116;
 }
 
 * {
@@ -21,16 +21,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-
-/* button {
-    font-family: 'Roboto', sans-serif;
-    border-radius: 5px;
-    box-shadow: 0px 2px 7px #000;
-}
-
-br {
-    clear: both;
-} */
 
 .nav-container {
     width: 100%;
@@ -53,6 +43,8 @@ br {
     color: var(--white);
     justify-self: start;
     margin-left: 20px;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 #navbar-logo {
@@ -80,7 +72,7 @@ br {
 }
 
 .nav-links-btn {
-    background-color: var(--brightred);
+    background-color: var(--lightred);
     padding: 6px 16px;
     border-radius: 4px;
 }
@@ -204,17 +196,21 @@ ul.file-list {
 }
 
 ul.file-list li {
+    /* make sure there is space between the text and the button */
     padding: 8px;
     margin-bottom: 8px;
-    background-color: #070F2B;
-    color: #e4e7fe;
+    background-color: rgba(0,0,0,.5);
+    color: #000000;
     border-radius: 5px;
     box-shadow: 0px 2px 7px #000;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 ul.file-list button {
     padding: 5px;
     margin: 5px;
+    margin-left: 15px;
     background-color: var(--lightred);
     color: #e4e7fe;
     border: none;
@@ -301,13 +297,7 @@ ul.file-list button:hover {
 }
 
 .upload-btn {
-    margin-left: 20px;
-    padding: 10px;
     background-color: var(--lightred);
-    color: #e4e7fe;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
     box-shadow: 0px 2px 7px #000;
 }
 
@@ -324,11 +314,15 @@ ul.file-list button:hover {
 }
 
 .upload-background {
-    background-color: var(--darkgray);
+    /* semi transparent background */
+    /* only the background though */
+    background-color: rgba(0, 0, 0, 0.6);
     margin: 5% auto;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #888;
     width: 50%;
+    box-shadow: 0px 2px 20px #000;
+    border-radius: 5px;
 }
 
 .close {
@@ -336,6 +330,8 @@ ul.file-list button:hover {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    translate: -10px -7px
+
 }
 
 .close:hover,
@@ -348,3 +344,34 @@ ul.file-list button:hover {
 
 
 
+
+/* Custom Styles */
+
+/* General Styles */
+
+
+/* Drop Zone Styles */
+#drop-zone {
+    transition: border-color 0.2s;
+}
+
+#drop-zone.dragover {
+    border-color: #2563EB; /* Tailwind's blue-600 */
+    background-color: #EFF6FF; /* Tailwind's blue-50 */
+}
+
+
+
+
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
