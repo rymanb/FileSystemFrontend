@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/rymanb/FileSystemFrontend#readme",
   "dependencies": {
+    "@azure/identity": "^4.5.0",
+    "@azure/keyvault-secrets": "^4.9.0",
+    "@types/node": "^22.9.0",
     "axios": "^1.7.7",
     "express": "^4.21.1",
     "express-formidable": "^1.2.0",

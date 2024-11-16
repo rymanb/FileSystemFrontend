@@ -1,6 +1,10 @@
 const express = require('express');
 const axios = require('axios');
 const request = require('request');
+const { DefaultAzureCredential } = require("@azure/identity");
+const { SecretClient } = require("@azure/keyvault-secrets");
+
+const credential = new DefaultAzureCredential();
 
 const app = express();
 app.use(express.static(__dirname + '/public'));
@@ -31,13 +35,25 @@ app.get('/', async (req, res) => {
     var userDBInterfaceUrl = 'https://userdatabaseinterface.internal.wonderfulsky-750ba161.westus2.azurecontainerapps.io/api/user';
     var userString = JSON.stringify(userJson);
 
+    var client = new SecretClient(url, credential);
+
+    const vaultName = "fileservicekeyvault";
+    const url = `https://${vaultName}.vault.azure.net`;
+
+    const client = new SecretClient(url, credential);
+
+    const authKey = await client.getSecret("UserDBKey");
+
+
+
 
         // send post request to user database interface to create user
         // will respont with 200 if it was successful
         fetch(userDBInterfaceUrl, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-auth-key': authKey.value
                 },
             body: userString
             })
