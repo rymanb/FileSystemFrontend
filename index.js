@@ -35,8 +35,6 @@ app.get('/', async (req, res) => {
     var userDBInterfaceUrl = 'https://userdatabaseinterface.internal.wonderfulsky-750ba161.westus2.azurecontainerapps.io/api/user';
     var userString = JSON.stringify(userJson);
 
-    var client = new SecretClient(url, credential);
-
     const vaultName = "fileservicekeyvault";
     const url = `https://${vaultName}.vault.azure.net`;
 
