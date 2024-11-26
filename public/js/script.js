@@ -225,17 +225,26 @@ function uploadFiles() {
         method: 'POST',
         body: formData
     })
-        .then(response => {
-            if (response.ok) {
-                alert('Files uploaded successfully.');
-                loadFileList(); // Refresh the file list
-                fileInput.value = ''; // Reset the file input
-            } else {
-                alert('Error uploading files.');
+    // then refresh file list
+    .then(response => {
+        if (response.status != 200) {
+            throw new Error('File upload returned status code ' + response.status);
             }
-        })
-        .catch(error => {
-            console.error('Error uploading files:', error);
-            alert('Error uploading files.');
-        });
+        }
+        )
+    .then(() => {
+        var ul = document.getElementById('filelist');
+        while (ul.firstChild) {
+            ul.removeChild(ul.firstChild);
+            }
+        updateFileList();
+        }
+        )
+    .catch(error => {
+        console.error('Error:', error);
+        }
+        );
+
+
+
 }
