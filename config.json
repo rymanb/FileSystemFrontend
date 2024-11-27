@@ -1,0 +1,5 @@
+{
+    "UserDBUrl": "https://userdatabaseinterface.internal.wonderfulsky-750ba161.westus2.azurecontainerapps.io",
+    "KeyVaultUrl": "https://fileservicekeyvault.vault.azure.net",
+    "FileServiceUrl": "https://filesystemapp.internal.wonderfulsky-750ba161.westus2.azurecontainerapps.io"
+}
