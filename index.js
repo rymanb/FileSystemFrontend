@@ -221,6 +221,7 @@ app.post('/upload', async (req, res) => {
     var url = 'https://filesystemapp.internal.wonderfulsky-750ba161.westus2.azurecontainerapps.io/uploadfile?userid=' + userid;
 
 
+    // pipe request to filesystemapp and pipe response to client
     req.pipe(request.post(url)).pipe(res);
 
 

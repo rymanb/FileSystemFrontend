@@ -233,11 +233,9 @@ function uploadFiles() {
         }
         )
     .then(() => {
-        var ul = document.getElementById('filelist');
-        while (ul.firstChild) {
-            ul.removeChild(ul.firstChild);
-            }
-        updateFileList();
+        // reload page to update file list
+        location.reload();
+ 
         }
         )
     .catch(error => {
