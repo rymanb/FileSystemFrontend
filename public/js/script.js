@@ -85,6 +85,7 @@ function updateFileList() {
 }
 
 function downloadFile(filename) {
+    // fetch file from server and download
     fetch('/download?filename=' + filename)
     .then(response => response.blob())
     .then(blob => {
@@ -121,6 +122,7 @@ async function getUser() {
         user.textContent = data.userid;
         });
 
+        // retrieve user profile from google
         const headers = {
             'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
